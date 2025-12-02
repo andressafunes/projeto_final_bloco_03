@@ -14,16 +14,7 @@ function App() {
           <Navbar />
           <div className="min-h-[70vh]">
             <Routes>              
-              <Route path="/" element={<Home />} />
-              {/* <Route path="/categorias" element={<ListaCategorias/>}/>
-              <Route path="/cadastrarcategoria" element={<FormCategoria />} />
-              <Route path="/editarcategoria/:id" element={<FormCategoria />} />
-              <Route path="/deletarcategoria/:id" element={<DeletarCategoria/>}/>
-              <Route path="/produtos" element={<ListaProdutos/>}/>
-              <Route path="/cadastrarproduto" element={<FormProduto/>}/>
-              <Route path="/editarproduto/:id" element={<FormProduto/>}/>
-              <Route path="/deletarproduto/:id" element={<DeletarProduto/>}/> */}
-
+              <Route path="/" element={<Home />} />           
             </Routes>
           </div>
           <Footer />
