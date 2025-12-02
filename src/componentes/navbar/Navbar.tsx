@@ -1,5 +1,6 @@
 import { MagnifyingGlassIcon, ShoppingCartIcon, UserIcon } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function Navbar() {
   return (
@@ -29,6 +30,7 @@ function Navbar() {
         <button
           type="submit"
           className="bg-green-500 px-4 py-2 rounded-md hover:bg-green-800 transition"
+          onClick={() => ToastAlerta('Função em Desenvolvimento!', 'info')}
         >
           <MagnifyingGlassIcon size={24} />
         </button>
@@ -39,8 +41,8 @@ function Navbar() {
         <Link to='/produtos' className="hover:underline">Produtos</Link>
         <Link to='/categorias' className="hover:underline">Categoria</Link>
         <Link to='/cadastrarcategoria' className="hover:underline">Cadastrar Categoria</Link>
-        <button><UserIcon size={24} /></button>
-        <button><ShoppingCartIcon size={24} /></button>
+        <button onClick={() => ToastAlerta('Função em Desenvolvimento!','info')}><UserIcon size={24} /></button>
+        <button onClick={() => ToastAlerta('Função em Desenvolvimento!', 'info')}><ShoppingCartIcon size={24} /></button>
       </div>
     </div>
   );

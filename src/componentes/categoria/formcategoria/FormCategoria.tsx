@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import type Categoria from "../../../models/Categoria";
 import { buscar, atualizar, cadastrar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormCategoria() {
 
@@ -54,20 +55,20 @@ function FormCategoria() {
       // Atualizar categoria existente
       try {
         await atualizar('/categorias', categoria, setCategoria);
-        alert('A categoria foi atualizada com sucesso!');
+        ToastAlerta('A categoria foi atualizada com sucesso!', 'sucesso');
       } catch (error) {
         console.error("Erro ao atualizar categoria:", error);
-        alert('Erro ao atualizar categoria.');
+        ToastAlerta('Erro ao atualizar categoria.', 'erro');
       }
 
     } else {
       // Cadastrar nova categoria
       try {
         await cadastrar('/categorias', categoria, setCategoria);
-        alert('A categoria foi cadastrada com sucesso!');
+        ToastAlerta('A categoria foi cadastrada com sucesso!', 'sucesso');
       } catch (error) {
         console.error("Erro ao cadastrar categoria:", error);
-        alert('Erro ao cadastrar categoria.');
+        ToastAlerta('Erro ao cadastrar categoria.', 'erro');
       }
     }
 

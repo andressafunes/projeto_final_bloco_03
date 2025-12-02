@@ -2,51 +2,50 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { buscar, deletar } from "../../../services/Service";
 import { ClipLoader } from "react-spinners";
-import type Categoria from "../../../models/Categoria";
+import type Produto from "../../../models/Produto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 
-function DeletarCategoria() {
+function DeletarProduto() {
 
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
+  // CORRIGIDO: nome da variável
+  const [produto, setProduto] = useState<Produto>({} as Produto);
 
   const { id } = useParams<{ id: string }>();
 
-  // 🔍 Busca categoria por ID (sem token)
-  async function buscarCategoriaPorId() {
+  async function buscarProdutoPorId() {
     try {
       setIsLoading(true);
-      await buscar(`/categorias/${id}`, setCategoria);
+      await buscar(`/produtos/${id}`, setProduto);
     } catch (error) {
-      console.error("Erro ao buscar categoria:", error);
-    }finally {
+      console.error("Erro ao buscar produto:", error);
+    } finally {
       setIsLoading(false);
     }
   }
 
   useEffect(() => {
     if (id !== undefined) {
-      buscarCategoriaPorId();
+      buscarProdutoPorId();
     }
   }, [id]);
 
   function retornar() {
-    navigate("/categorias");
+    navigate("/produtos");
   }
 
-  // 🗑️ Deletar categoria (sem token)
-  async function deletarCategoria() {
+  async function deletarProduto() {
     setIsLoading(true);
 
     try {
-      await deletar(`/categorias/${id}`);
-      ToastAlerta('Categoria deletada com sucesso!', 'sucesso');
+      await deletar(`/produtos/${id}`);
+      ToastAlerta("Produto deletado com sucesso!", 'sucesso');
     } catch (error) {
-      console.error("Erro ao deletar categoria:", error);
-      ToastAlerta('Erro ao deletar categoria!', 'erro');
+      console.error("Erro ao deletar produto:", error);
+      ToastAlerta("Erro ao deletar produto!", 'erro');
     }
 
     setIsLoading(false);
@@ -55,18 +54,20 @@ function DeletarCategoria() {
 
   return (
     <div className="container w-1/3 mx-auto">
-      <h1 className="text-green-950 font-bold text-4xl text-center my-4">Deletar Categoria</h1>
+      <h1 className="text-4xl text-center my-4">Deletar Produto</h1>
 
-      <p className="text-green-950 text-center font-semibold mb-4">
-        Você tem certeza de que deseja apagar a categoria a seguir?
+      <p className="text-center font-semibold mb-4">
+        Você tem certeza de que deseja apagar o produto a seguir?
       </p>
 
       <div className="border flex flex-col rounded-2xl overflow-hidden justify-between">
         <header className="py-2 px-6 bg-green-600 text-white font-bold text-2xl">
-          Categoria
+          {produto.nome}
         </header>
 
-        <p className="text-green-950 p-8 text-3xl bg-green-50 h-full">{categoria.nome}</p>
+        <p className="p-8 text-3xl bg-green-50 h-full">
+          {produto.nome}
+        </p>
 
         <div className="flex">
           <button
@@ -78,12 +79,10 @@ function DeletarCategoria() {
 
           <button
             className="text-slate-100 bg-green-500 hover:bg-green-600 w-full py-2 justify-center"
-            onClick={deletarCategoria}
+            onClick={deletarProduto}
           >
             {isLoading ? (
-              <ClipLoader
-                  color="#0d542b"
-                  size={24} />
+              <ClipLoader color="#0d542b" size={24} />
             ) : (
               <span>Sim</span>
             )}
@@ -91,7 +90,7 @@ function DeletarCategoria() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default DeletarCategoria;
+export default DeletarProduto;
