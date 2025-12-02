@@ -1,73 +1,163 @@
-# React + TypeScript + Vite
+# 💊 **Farmácia --- Frontend (React + TypeScript)**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação moderna e responsiva desenvolvida em **React**, voltada
+para o gerenciamento de **produtos** e **categorias** de uma farmácia
+fictícia.\
+O projeto consome uma **API REST** e apresenta uma interface amigável,
+organizada e fácil de navegar.
 
-Currently, two official plugins are available:
+------------------------------------------------------------------------
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ **Recursos do Projeto**
 
-## React Compiler
+-   🗂️ Listagem de categorias\
+-   ➕ Cadastro e edição de categorias\
+-   🛒 Listagem completa de produtos\
+-   🖼️ Cards de produtos com imagem, preço e categoria\
+-   📦 Relação Categoria → Produtos\
+-   📱 Layout totalmente responsivo\
+-   ⚡ Carregamento com Loader elegante\
+-   🪟 Popups modais com **reactjs-popup**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+------------------------------------------------------------------------
 
-## Expanding the ESLint configuration
+## 🛠️ **Tecnologias Utilizadas**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  Tecnologia             Função
+---------------------- -----------------------
+  **React + Vite**       Estrutura do frontend
+  **TypeScript**         Tipagem e manutenção
+  **Axios**              Consumo da API
+  **React Router DOM**   Navegação
+  **TailwindCSS**        Estilização
+  **React Icons**        Ícones para interface
+  **ReactJS-Popup**      Modais e popups
+  **React Spinners**     Loaders
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+------------------------------------------------------------------------
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🧩 **Modelos das Entidades**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 📁 **Categoria**
+
+Representa uma categoria de produtos (ex: Antibióticos, Vitaminas,
+Higiene).
+
+  Atributo     Tipo          Descrição
+------------ ------------- ------------------------------
+  `id`         number        Identificador da categoria
+  `nome`       string        Nome da categoria
+  `produtos`   Produto\[\]   Lista de produtos associados
+
+------------------------------------------------------------------------
+
+### 🛒 **Produto**
+
+Item disponível para compra.
+
+  Atributo      Tipo        Descrição
+------------- ----------- --------------------------
+  `id`          number      Identificador do produto
+  `nome`        string      Nome do produto
+  `preco`       number      Preço
+  `foto`        string      URL da imagem
+  `categoria`   Categoria   Categoria associada
+
+------------------------------------------------------------------------
+
+## 🔗 **Relacionamento**
+
+    Categoria (1) ───── (N) Produto
+
+------------------------------------------------------------------------
+
+## 📂 **Estrutura Recomendada**
+
+    src/
+     ├── assets/
+     ├── components/
+     │     ├── navbar/
+     │     ├── footer/
+     │     ├── cardproduto/
+     │     ├── cardcategoria/
+     │     └── modal/
+     ├── pages/
+     │     ├── produtos/
+     │     └── categorias/
+     ├── services/
+     │     └── Service.ts
+     ├── contexts/
+     ├── models/
+     │     ├── Produto.ts
+     │     └── Categoria.ts
+     ├── App.tsx
+     └── main.tsx
+
+------------------------------------------------------------------------
+
+## 🚀 **Como Rodar o Projeto**
+
+### 1️⃣ Clonar o repositório
+
+``` bash
+git clone https://github.com/seuusuario/farmacia-frontend.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2️⃣ Entrar no diretório
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+``` bash
+cd farmacia-frontend
 ```
+
+### 3️⃣ Instalar dependências
+
+``` bash
+npm install
+```
+
+### 4️⃣ Executar
+
+``` bash
+npm run dev
+```
+
+### 5️⃣ Acessar no navegador
+
+    http://localhost:5173
+
+------------------------------------------------------------------------
+
+## 🌐 **Integração com Backend**
+
+O frontend se conecta com a API:
+
+### 🗂️ Categorias
+
+-   `GET /categorias`
+-   `POST /categorias`
+-   `PUT /categorias`
+-   `DELETE /categorias/{id}`
+
+### 🛒 Produtos
+
+-   `GET /produtos`
+-   `POST /produtos`
+-   `PUT /produtos`
+-   `DELETE /produtos/{id}`
+
+------------------------------------------------------------------------
+
+## 👩‍💻 **Autora**
+
+**Andressa Funes**\
+Aplicação desenvolvida como parte do aprendizado em **React + Java
+(API)**.
+
+------------------------------------------------------------------------
+
+## ⭐ **Sugestões Futuras**
+
+-   Autenticação com JWT\
+-   Carrinho de compras\
+-   Tela de detalhes do produto\
+-   Upload de imagem direta no frontend
